@@ -1,0 +1,26 @@
+services:
+  web:
+    build:
+      context: C:\Proyectos\Docker\Ejemplos\awesome-compose\vuejs\vuejs
+      dockerfile: C:\Proyectos\Docker\Ejemplos\awesome-compose\vuejs\vuejs\Dockerfile
+      target: dev-envs
+    labels:
+      com.docker.devenvironments.compose: "true"
+      com.docker.devenvironments.compose.build: "true"
+      com.docker.devenvironments.name: vuejs-nice_curie
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8080
+      published: 8080
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /var/run/docker.sock
+      target: /var/run/docker.sock
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: vuejs-nice_curie_default
